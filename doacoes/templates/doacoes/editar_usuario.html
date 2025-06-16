@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="container" style="max-width: 600px; margin: 40px auto;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Editar Dados Pessoais</h2>
+
+    <form method="post" style="display: flex; flex-direction: column; align-items: center;">
+        {% csrf_token %}
+
+        <div style="width: 100%; margin-bottom: 20px;">
+            {{ form.username.label_tag }}
+            {% render_field form.username style="width: 100%; padding: 8px;" %}
+        </div>
+
+        <div style="width: 100%; margin-bottom: 20px;">
+            {{ form.telefone.label_tag }}
+            {% render_field form.telefone style="width: 100%; padding: 8px;" %}
+        </div>
+
+        <div style="width: 100%; margin-bottom: 30px;">
+            {{ form.endereco.label_tag }}
+            {% render_field form.endereco style="width: 100%; padding: 8px;" %}
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 30px;">
+            <a href="{% url url_voltar %}" style="width: 150px; padding: 10px 0; text-align: center; background-color: #d9534f; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; line-height: 1.5;">
+                Cancelar
+            </a>
+
+            <button type="submit" style="width: 150px; padding: 10px 0; text-align: center; background-color: #008c8c; color: white; border: none; border-radius: 6px; font-size: 14px; line-height: 1.5;">
+                Salvar
+            </button>
+
+            <a href="{% url 'trocar_senha' %}" style="width: 150px; padding: 10px 0; text-align: center; background-color: #008c8c; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; line-height: 1.5;">
+                Alterar Senha
+            </a>
+        </div>
+    </form>
+</main>
+{% endblock %}

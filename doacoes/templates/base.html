@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}AjudeFácil{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+<header style="background-color: #008B8B; color: white; padding: 10px;">
+    <h1>AjudeFácil</h1>
+</header>
+
+<main style="flex: 1; padding: 20px;">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer style="background-color: #008B8B; color: white; text-align: center; padding: 10px 0; width: 100%;">
+    © 2025 AjudeFácil. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>
+

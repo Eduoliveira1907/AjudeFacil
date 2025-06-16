@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="container" style="flex: 1; max-width: 600px; margin: 0 auto; padding: 40px 0;">
+    <h2 style="text-align: center;">Bem-vindo, voluntário!</h2>
+
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+        <li><a href="{% url 'listar_doacoes' %}" class="botao" style="width: 280px; text-align: center;">Visualizar Doações</a></li>
+        <li><a href="{% url 'distribuir_por_categoria' %}" class="botao" style="width: 280px; text-align: center;">Distribuir por Categoria</a></li>
+        <li><a href="{% url 'cadastrar_recebedor' %}" class="botao" style="width: 280px; text-align: center;">Cadastrar Recebedor</a></li>
+        <li><a href="{% url 'editar_dados' %}" class="botao" style="width: 280px; text-align: center;">Editar Dados Pessoais</a></li>
+        <li><a href="{% url 'logout' %}" class="botao" style="width: 280px; text-align: center; background-color: #d9534f;">Sair</a></li>
+    </ul>
+</main>
+{% endblock %}
+

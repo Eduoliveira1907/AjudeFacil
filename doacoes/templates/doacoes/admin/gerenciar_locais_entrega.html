@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container" style="max-width: 900px; margin: 40px auto;">
+  <h1 style="text-align: center; margin-bottom: 20px;">Gerenciar Locais de Entrega</h1>
+
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <a href="{% url 'admin_dashboard' %}" class="botao" style="background-color: #d9534f; color: white;">Voltar</a>
+    <a href="{% url 'admin_criar_local_entrega' %}" class="botao" style="background-color: #008c8c; color: white;">Novo Local</a>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #005f73; color: white;">
+        <th style="padding: 8px;">ID</th>
+        <th style="padding: 8px;">Nome</th>
+        <th style="padding: 8px;">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for local in locais %}
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px; text-align: center;">{{ local.id }}</td>
+        <td style="padding: 8px;">{{ local.nome }}</td>
+        <td style="padding: 8px; text-align: center;">
+          <a href="{% url 'admin_editar_local_entrega' local.id %}" style="margin-right: 10px; color: #008c8c;">Editar</a>
+          <a href="{% url 'admin_excluir_local_entrega' local.id %}" style="color: #d9534f;" onclick="return confirm('Confirma exclusão?');">Excluir</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" style="padding: 12px; text-align: center;">Nenhum local cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>
+{% endblock %}

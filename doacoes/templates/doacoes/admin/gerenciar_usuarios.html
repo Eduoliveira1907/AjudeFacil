@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container" style="max-width: 900px; margin: 40px auto;">
+  <h1 style="text-align: center; margin-bottom: 20px;">Gerenciar Usuários</h1>
+
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <a href="{% url 'admin_dashboard' %}" class="botao" style="background-color: #d9534f; color: white;">Voltar</a>
+    <a href="{% url 'admin_criar_usuario' %}" class="botao" style="background-color: #008c8c; color: white;">Novo Usuário</a>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #005f73; color: white;">
+        <th style="padding: 8px;">ID</th>
+        <th style="padding: 8px;">Usuário</th>
+        <th style="padding: 8px;">E-mail</th>
+        <th style="padding: 8px;">Tipo</th>
+        <th style="padding: 8px;">Status</th>
+        <th style="padding: 8px;">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in usuarios %}
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px; text-align: center;">{{ user.id }}</td>
+        <td style="padding: 8px;">{{ user.username }}</td>
+        <td style="padding: 8px;">{{ user.email }}</td>
+        <td style="padding: 8px;">{{ user.perfil.tipo }}</td>
+        <td style="padding: 8px; text-align: center;">
+          {% if not user.is_superuser %}
+            {% if user.is_active %}
+              Ativo
+            {% else %}
+              Inativo
+            {% endif %}
+          {% else %}
+            Admin
+          {% endif %}
+        </td>
+        <td style="padding: 8px; text-align: center;">
+          <a href="{% url 'admin_editar_usuario' user.id %}" style="margin-right: 10px; color: #008c8c;">Editar</a>
+          <a href="{% url 'admin_excluir_usuario' user.id %}" onclick="return confirm('Confirma exclusão?');" style="margin-right: 10px; color: #d9534f;">Excluir</a>
+          {% if not user.is_superuser %}
+            <a href="{% url 'admin_alterar_status_usuario' user.id %}" style="color: #008c8c;">
+              {% if user.is_active %}Desativar{% else %}Ativar{% endif %}
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" style="padding: 12px; text-align: center;">Nenhum usuário cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>
+{% endblock %}

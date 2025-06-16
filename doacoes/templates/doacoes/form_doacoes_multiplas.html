@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="container" style="max-width:600px; margin:40px auto;">
+  <h2 style="text-align:center;">Doar Múltiplos Itens</h2>
+
+  <form method="post" style="margin-top: 30px;">
+    {% csrf_token %}
+
+    <fieldset style="margin-bottom: 20px;">
+      <legend>Informações Gerais</legend>
+      <div style="margin-bottom: 10px;">
+        {{ form.local_entrega.label_tag }}<br>
+        {{ form.local_entrega }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        {{ form.descricao.label_tag }}<br>
+        {{ form.descricao }}
+        {% if form.descricao.errors %}
+          <div style="color: red;">{{ form.descricao.errors }}</div>
+        {% endif %}
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Quantidades por Categoria</legend>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        {% for field in form %}
+          {% if field.name != 'local_entrega' and field.name != 'descricao' %}
+            <div>
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+              <input type='number' name='{{ field.name }}' id='{{ field.id_for_label }}' min='0' style='width: 100%; max-width: 300px; box-sizing: border-box;'>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </fieldset>
+
+    <div style="margin-top: 25px; text-align: center;">
+      <a href="{% url url_voltar %}" class="botao" style="background-color: #d9534f; color: #fff; margin-right: 10px;">
+        Voltar
+      </a>
+      <button type="submit" class="botao">Doar</button>
+    </div>
+  </form>
+</main>
+{% endblock %}

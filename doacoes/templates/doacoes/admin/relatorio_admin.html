@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container" style="margin: 20px auto; max-width: 800px;">
+
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+    <a href="{% url 'admin_dashboard' %}" class="botao" style="background-color: #d9534f; color: white; padding: 8px 16px; text-decoration: none;">
+      Voltar
+    </a>
+    <h2 style="margin: 0 auto; transform: translateY(-5px);">Relatório de Doações</h2>
+  </div>
+
+  <form method="get" style="margin-bottom: 20px;">
+    <label>Categoria:</label>
+    <select name="categoria">
+      <option value="">Todas</option>
+      {% for c in categorias %}
+        <option value="{{ c.id }}" {% if cid == c.id|stringformat:"s" %}selected{% endif %}>{{ c.nome }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Status:</label>
+    <select name="status">
+      <option value="">Todos</option>
+      <option value="pendente" {% if status == 'pendente' %}selected{% endif %}>Pendente</option>
+      <option value="distribuida" {% if status == 'distribuida' %}selected{% endif %}>Distribuída</option>
+    </select>
+
+    <label>Local de Entrega:</label>
+    <select name="local_entrega">
+      <option value="">Todos</option>
+      {% for l in locais %}
+        <option value="{{ l.id }}" {% if lid == l.id|stringformat:"s" %}selected{% endif %}>{{ l.nome }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Filtrar</button>
+  </form>
+
+  {% if doacoes %}
+    <p style="margin-bottom: 10px;"><strong>Total geral:</strong> {{ total }}</p>
+
+    <!-- Tabela de resultados -->
+    <table border="1" cellspacing="0" cellpadding="6" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Status</th>
+          <th>Local</th>
+          <th>Doador</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in doacoes %}
+        <tr>
+          <td>
+            {% if d.categoria %}{{ d.categoria.nome }}{% elif d.categoria_id %}{{ d.get_categoria_display }}{% endif %}
+          </td>
+          <td>{{ d.quantidade }}</td>
+          <td>
+            {% if d.status %}{{ d.status }}{% else %}distribuida{% endif %}
+          </td>
+          <td>
+            {% if d.local_entrega %}{{ d.local_entrega }}{% else %}—{% endif %}
+          </td>
+          <td>
+            {% if d.doador.username %}{{ d.doador.username }}{% elif d.doador %}{{ d.doador }}{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Nenhuma doação encontrada.</p>
+  {% endif %}
+
+</main>
+{% endblock %}

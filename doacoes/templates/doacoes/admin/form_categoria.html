@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container" style="max-width:600px; margin:40px auto;">
+  <h1 style="text-align:center; margin-bottom:20px;">{{ acao }}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group" style="margin-bottom:15px;">
+      <label for="id_nome">Nome da Categoria</label>
+      <input type="text" name="nome" id="id_nome" class="form-control" value="{{ categoria.nome|default_if_none:'' }}" required>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="{% url 'admin_gerenciar_categorias' %}" class="botao" style="background-color:#d9534f; color:#fff; margin-right:10px;">Cancelar</a>
+      <button type="submit" class="botao">{{ acao }}</button>
+    </div>
+
+  </form>
+</main>
+{% endblock %}
+

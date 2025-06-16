@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container" style="flex: 1; max-width: 600px; margin: 0 auto; padding: 40px 0;">
+    <h2 style="text-align: center;">Bem-vindo(a), {{ request.user.username }}!</h2>
+
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+        <li><a href="{% url 'fazer_doacoes_multiplas' %}" class="botao" style="width: 280px; text-align: center;">Doar Múltiplos Itens</a></li>
+        <li><a href="{% url 'minhas_doacoes' %}" class="botao" style="width: 280px; text-align: center;">Minhas Doações</a></li>
+        <li><a href="{% url 'editar_dados' %}" class="botao" style="width: 280px; text-align: center;">Editar Meus Dados</a></li>
+        <li><a href="{% url 'logout' %}" class="botao" style="width: 280px; text-align: center; background-color: #d9534f;">Sair</a></li>
+    </ul>
+</main>
+{% endblock %}
