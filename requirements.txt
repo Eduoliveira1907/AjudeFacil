@@ -9,3 +9,4 @@ tzdata==2025.1
 validate_docbr==1.11.0
 virtualenv==20.29.3
 gunicorn
+whitenoise
