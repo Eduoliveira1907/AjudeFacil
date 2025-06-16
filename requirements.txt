@@ -10,3 +10,5 @@ validate_docbr==1.11.0
 virtualenv==20.29.3
 gunicorn
 whitenoise
+dj-database-url
+psycopg2-binary
